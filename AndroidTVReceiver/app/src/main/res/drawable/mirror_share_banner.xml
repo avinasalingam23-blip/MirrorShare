@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <size android:width="320dp" android:height="180dp" />
+            <solid android:color="#F2F7FF" />
+        </shape>
+    </item>
+    <item android:width="288dp" android:height="96dp" android:gravity="center">
+        <bitmap android:src="@drawable/mirror_share_logo" android:gravity="fill" android:filter="true" />
+    </item>
+</layer-list>

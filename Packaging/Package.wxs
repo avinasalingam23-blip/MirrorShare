@@ -1,0 +1,43 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:fire="http://wixtoolset.org/schemas/v4/wxs/firewall">
+  <Package Name="Mirror Share" Manufacturer="Mirror Share" Version="1.0.0"
+           UpgradeCode="A5F334BB-42B4-43C5-92E4-6791982DE355"
+           Language="1033" Scope="perMachine">
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Mirror Share is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+    <Icon Id="MirrorShareIcon" SourceFile="$(var.BrandingDir)\mirror_share.ico" />
+    <Property Id="ARPPRODUCTICON" Value="MirrorShareIcon" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Mirror Share" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="Mirror Share" />
+    </StandardDirectory>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="MainApplication" Guid="*">
+        <File Id="MirrorShareExe" Source="$(var.PublishDir)\MirrorShare.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuShortcut" Directory="ApplicationProgramsFolder"
+                    Name="Mirror Share" Advertise="yes" WorkingDirectory="INSTALLFOLDER"
+                    Icon="MirrorShareIcon" IconIndex="0" />
+          <fire:FirewallException Id="MirrorShareDiscovery" Name="Mirror Share - LAN discovery"
+                                  Profile="private" Protocol="udp" Scope="localSubnet" />
+        </File>
+        <RemoveFolder Id="RemoveStartMenuFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+
+    <ComponentGroup Id="ApplicationPayload" Directory="INSTALLFOLDER">
+      <Files Include="$(var.PublishDir)\**">
+        <Exclude Files="$(var.PublishDir)\MirrorShare.exe" />
+      </Files>
+    </ComponentGroup>
+
+    <Feature Id="MainFeature" Title="Mirror Share" Level="1">
+      <ComponentRef Id="MainApplication" />
+      <ComponentGroupRef Id="ApplicationPayload" />
+    </Feature>
+  </Package>
+</Wix>

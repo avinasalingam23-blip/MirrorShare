@@ -1,0 +1,12 @@
+<Project Sdk="WixToolset.Sdk/5.0.2">
+  <PropertyGroup>
+    <OutputName>MirrorShare-Setup</OutputName>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <OutputPath>$(MSBuildThisFileDirectory)..\artifacts\</OutputPath>
+    <PublishDir Condition="'$(PublishDir)' == ''">$(MSBuildThisFileDirectory)..\WindowsSender\publish\win-x64</PublishDir>
+    <DefineConstants>PublishDir=$(PublishDir);BrandingDir=$(MSBuildThisFileDirectory)..\Branding</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Firewall.wixext" Version="5.0.2" />
+  </ItemGroup>
+</Project>
