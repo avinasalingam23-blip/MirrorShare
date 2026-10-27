@@ -5,8 +5,8 @@
            Language="1033" Scope="perMachine">
     <MajorUpgrade DowngradeErrorMessage="A newer version of Mirror Share is already installed." />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
-    <Icon Id="MirrorShareIcon" SourceFile="$(var.BrandingDir)\mirror_share.ico" />
-    <Property Id="ARPPRODUCTICON" Value="MirrorShareIcon" />
+    <Icon Id="MirrorShareIcon.exe" SourceFile="$(var.PublishDir)\MirrorShare.exe" />
+    <Property Id="ARPPRODUCTICON" Value="MirrorShareIcon.exe" />
     <Property Id="ARPNOMODIFY" Value="1" />
 
     <StandardDirectory Id="ProgramFiles64Folder">
@@ -21,7 +21,7 @@
         <File Id="MirrorShareExe" Source="$(var.PublishDir)\MirrorShare.exe" KeyPath="yes">
           <Shortcut Id="StartMenuShortcut" Directory="ApplicationProgramsFolder"
                     Name="Mirror Share" Advertise="yes" WorkingDirectory="INSTALLFOLDER"
-                    Icon="MirrorShareIcon" IconIndex="0" />
+                    Icon="MirrorShareIcon.exe" IconIndex="0" />
           <fire:FirewallException Id="MirrorShareDiscovery" Name="Mirror Share - LAN discovery"
                                   Profile="private" Protocol="udp" Scope="localSubnet" />
         </File>
